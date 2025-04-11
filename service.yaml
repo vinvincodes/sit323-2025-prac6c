@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service # Tells Kubernetes to create a Service
+metadata:
+  name: node-app-service # Service name
+spec:
+  type: NodePort # Exposes service on a static port on each node
+  selector:
+    app: node-app
+  ports:
+    - port: 80 # Port the service listens on (internal)
+      targetPort: 3000 # sends to the container port of the application
+      nodePort: 30000 # Exposes on localhost:30000 (external access)

@@ -1,0 +1,19 @@
+apiVersion: apps/v1 # Uses the API group for apps
+kind: Deployment # Tells Kubernetes to create a Deployment
+metadata:
+  name: node-app-deployment # Deployment name
+spec:
+  replicas: 2 # Run 2 instances (pods) of the app
+  selector:
+    matchLabels:
+      app: node-app # Match pods with this label
+  template:
+    metadata:
+      labels:
+        app: node-app # Label for the pod (used by service selector)
+    spec:
+      containers:
+        - name: node-app # Name of the container
+          image: node-app:v1 # Docker image to run
+          ports:
+            - containerPort: 3000 # App runs on port 3000
